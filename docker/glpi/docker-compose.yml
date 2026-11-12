@@ -1,0 +1,32 @@
+name: glpi
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: glpi-db
+    env_file: ./db.env
+    volumes:
+      - glpi-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  glpi:
+    image: glpi/glpi:latest
+    container_name: glpi-app
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: ./glpi.env
+    ports:
+      - "8081:80"
+    volumes:
+      - glpi-data:/var/glpi
+    restart: unless-stopped
+
+volumes:
+  glpi-db:
+  glpi-data:
