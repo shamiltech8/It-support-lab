@@ -78,3 +78,9 @@ Concept studied: automatic SLA assignment by business rule. The rule form in my 
 - Times are in server time (UTC), because time zone support is not enabled.
 - Email reminders were not configured, because the lab has no mail server (Concept studied).
 - I created a test service level while the Root entity was selected. Prevention: check the entity indicator before creating anything.
+
+### Lesson 5 final result: escalation alarm
+- Real P1 alarm on ticket 1 (no technician assigned): the schedule row was consumed at 08:05 server time and the scheduler logged "fully processed".
+- No group appeared on the ticket afterwards.
+- Status: alarm scheduling and execution confirmed. Visible effect of the action NOT confirmed. I do not claim it as working end to end.
+- If revisited: check the ticket history and GLPI 12 documentation for how escalation actions apply.
