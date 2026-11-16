@@ -1,0 +1,80 @@
+# Phase 1 Log: GLPI helpdesk
+Label: Real
+
+## Problem 1: Docker install conflict
+- Symptom: apt failed with a file clash on the Compose plugin.
+- Root cause: Ubuntu's docker.io and Docker's official docker-ce ship the same files.
+- Fix: removed the Ubuntu packages, reinstalled the official ones.
+- Verification: docker --version, docker compose version, hello-world.
+
+## Problem 2: GLPI container would not start
+- Symptom: "address already in use" on port 8080.
+- Investigation: sudo ss -ltnp showed a java process.
+- Root cause: Jenkins was already using port 8080.
+- Fix: published GLPI on 8081, stopped and disabled Jenkins to free RAM.
+
+## Problem 3: Low RAM from earlier projects
+- Symptom: high memory and swap use, unexpected /metrics requests in the GLPI log.
+- Root cause: an earlier project's containers and services restarted with WSL.
+- Fix: stopped them for lab sessions, without deleting anything.
+
+## Problem 4: Could not log in with the default GLPI account
+- Symptom: glpi/glpi and tech/tech were rejected.
+- Investigation: the install log showed the default account was created, and the database listed the accounts as active.
+- Fix: reset the password hash from the command line, then created my own admin and disabled the defaults.
+- Root cause: not confirmed (probably an input problem).
+- Lesson: check what the system actually holds before changing it.
+
+## Problem 5: Could not see a group in a dropdown
+- Symptom: Sales was missing from the options after I had added everyone.
+- Investigation: a database query counted the members of each group.
+- Finding: all four groups had the right number of members, so the dropdown was hiding groups already assigned.
+
+## Problem 6: Manufacturer typo in the asset list
+- Symptom: the manufacturer list showed "Lenova" instead of "Lenovo".
+- Investigation: a database query listing the manufacturers.
+- Root cause: a typing error when I created the dropdown value.
+- Fix: renamed the entry once in GLPI, which updated every linked laptop.
+- Prevention: check spelling and confirm each value in the list after adding it.
+
+## Problem 7: Printer type and model dropdowns were empty
+- Symptom: the Type and Model fields on the printer form showed no options.
+- Investigation: queried the printer types and models tables. Both were empty.
+- Root cause: my earlier entries had not been saved.
+- Fix: recreated them under Setup > Dropdowns and confirmed each one appeared in the list.
+- Lesson: "no error" does not prove it saved. Verify with a query.
+
+## Problem 8: Extra clone records
+- Symptom: an audit query found three records with "(copy)" in the name.
+- Investigation: listed them with their serial numbers and deleted flag. All three were in the GLPI trash.
+- Root cause: I entered the wrong number of copies when cloning.
+- Fix: checked each serial first, then permanently deleted the three junk records.
+- Verification: copies = 0, live laptops = 20, no serial outside the SN-XX-NNNN pattern.
+- Prevention: check the number-of-copies box before cloning, then run the audit query.
+
+## Lesson 5: Categories, SLA and escalation (GLPI 12.0.2)
+
+Implemented: 10 ITIL categories, an office-hours calendar (Mon-Fri 08:00-17:00), four SLAs (P1-P4) each with time to own and time to resolve, and two escalation alarms on P1.
+Verified: a ticket created on a Sunday got due dates on Monday 08:15 and 12:00, so the calendar works.
+Concept studied: automatic SLA assignment by business rule. The rule form in my version did not show the priority and SLA fields, so I attached the SLA by hand.
+
+### Problem 9: SLA items had no names
+- Symptom: the SLA dropdown showed only numbers (1, 3, 5, 7).
+- Root cause: I created the items without a name.
+- Fix: named all eight items (for example "P1 TTO 15 MIN").
+
+### Problem 10: Escalation alarms were not running
+- Symptom: the SLA task last ran 42 minutes earlier.
+- Investigation: queried the scheduled tasks table. The task was in web mode.
+- Fix: switched it to CLI mode, then confirmed it runs every minute.
+
+### Problem 11: Test alarm showed no effect
+- Symptom: the alarm ran but no group was added.
+- Investigation: checked tickets, groups, the alarm schedule and the ticket history by query.
+- Findings: the alarm was only scheduled when it existed before the SLA was attached. GLPI also auto-assigned me as technician on ticket creation.
+- Status: the final confirmation uses the real P1 alarm on ticket 1 (see below).
+
+### Known limitations
+- Times are in server time (UTC), because time zone support is not enabled.
+- Email reminders were not configured, because the lab has no mail server (Concept studied).
+- I created a test service level while the Root entity was selected. Prevention: check the entity indicator before creating anything.
