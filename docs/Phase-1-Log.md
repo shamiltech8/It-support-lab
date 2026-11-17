@@ -84,3 +84,13 @@ Concept studied: automatic SLA assignment by business rule. The rule form in my 
 - No group appeared on the ticket afterwards.
 - Status: alarm scheduling and execution confirmed. Visible effect of the action NOT confirmed. I do not claim it as working end to end.
 - If revisited: check the ticket history and GLPI 12 documentation for how escalation actions apply.
+
+## Lesson 6: Knowledge base (GLPI 12.0.2)
+Implemented: 5 knowledge base categories and 5 how-to articles (password reset, printer, Outlook, Wi-Fi, slow computer), each with symptom, steps and escalation.
+
+### Problem 12: Could not add a target to an article
+- Symptom: the Targets tab showed "unexpected error" when adding a target.
+- Investigation: checked the PHP and SQL error logs (no matching entry) and confirmed the target table stayed empty.
+- Workaround: inserted the target rows directly into the database (entity = Desert Bay Trading LLC, recursive).
+- Status: the UI error was NOT resolved. Targets were set through the database, so this is a lab workaround and not a recommended practice.
+- Lesson: the tab is called "Targets" in GLPI 12 (I first looked for "Visibility"). An article with no target is personal and unpublished.
