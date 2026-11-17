@@ -94,3 +94,9 @@ Implemented: 5 knowledge base categories and 5 how-to articles (password reset, 
 - Workaround: inserted the target rows directly into the database (entity = Desert Bay Trading LLC, recursive).
 - Status: the UI error was NOT resolved. Targets were set through the database, so this is a lab workaround and not a recommended practice.
 - Lesson: the tab is called "Targets" in GLPI 12 (I first looked for "Visibility"). An article with no target is personal and unpublished.
+
+### Problem 13: Duplicate knowledge base article
+- Symptom: two articles with the same title ("My computer is slow: checklist").
+- Root cause: I clicked Add twice.
+- Fix: removed the duplicate (UI delete option was not available, so it was removed through the database, including its target and revision rows).
+- Prevention: check the article list after saving, and do not click Add twice.
