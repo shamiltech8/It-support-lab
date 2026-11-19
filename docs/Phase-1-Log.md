@@ -56,7 +56,7 @@ Label: Real
 
 Implemented: 10 ITIL categories, an office-hours calendar (Mon-Fri 08:00-17:00), four SLAs (P1-P4) each with time to own and time to resolve, and two escalation alarms on P1.
 Verified: a ticket created on a Sunday got due dates on Monday 08:15 and 12:00, so the calendar works.
-Concept studied: automatic SLA assignment by business rule. The rule form in my version did not show the priority and SLA fields, so I attached the SLA by hand.
+At the time of Lesson 5, automatic SLA assignment was not configured, so SLAs were assigned manually. Automatic SLA assignment was subsequently implemented and successfully tested during Phase 1 final verification (see below).
 
 ### Problem 9: SLA items had no names
 - Symptom: the SLA dropdown showed only numbers (1, 3, 5, 7).
@@ -100,3 +100,85 @@ Implemented: 5 knowledge base categories and 5 how-to articles (password reset, 
 - Root cause: I clicked Add twice.
 - Fix: removed the duplicate (UI delete option was not available, so it was removed through the database, including its target and revision rows).
 - Prevention: check the article list after saving, and do not click Add twice.
+
+## Lesson 7: Helpdesk ticket management
+
+Implemented: Five GLPI helpdesk ticket workflows covering incidents, a service request, asset allocation, user permissions, ticket follow-ups and management escalation.
+
+### Problem 14: Existing tickets were missing from the list
+- Symptom: only the printer ticket appeared after multiple tickets had been created.
+- Investigation: reviewed the ticket list and its search filters.
+- Root cause: active search filters were hiding other tickets.
+- Fix: cleared the filters and verified that all tickets appeared.
+- Lesson: check search filters before assuming a record was deleted.
+
+### Ticket workflow results
+- Ticket 1: Outlook will not open — Closed.
+- Ticket 2: Printer offline on Floor 2 — Closed.
+- Ticket 3: Locked account — Closed.
+- Ticket 4: New joiner needs a laptop and account — Pending.
+- Ticket 5: Floor 2 Wi-Fi has no internet — Processing (Assigned).
+
+### Asset and account administration
+- Linked laptop DBT-LT-016 to Ticket 4.
+- Assigned the laptop to Costa Danial.
+- Changed asset status from In stock to In use.
+- Verified Costa Danial's GLPI account was active.
+- Assigned the Self-Service profile.
+- Windows and Microsoft 365 account provisioning remain pending.
+
+### Escalation exercise
+- Assigned the Floor 2 Wi-Fi incident to Omar Haddad and IT Management.
+- Verified both assignments.
+- Recorded private escalation notes and a public update.
+- Status: manual escalation routing verified; technical resolution and automatic escalation action remain unverified.
+
+### SLA assignment
+- Manually assigned SLAs to all five original tickets.
+
+## Phase 1: Automatic SLA assignment verification
+
+### Problem 15: SLA automation rule was created under the wrong rule type
+- Symptom: the expected ticket SLA actions were unavailable.
+- Investigation: checked the exact rule section in GLPI.
+- Root cause: Business rules for assets was being inspected instead of Business rules for tickets.
+- Fix: opened Administration > Rules > Business rules for tickets.
+- Lesson: confirm the rule type before troubleshooting missing criteria or actions.
+
+### Automatic SLA rule implementation
+- Created rule: Automatic SLA Assignment - High Priority.
+- Criterion: Urgency = High.
+- Action 1: assign the existing SLA TTR.
+- Action 2: assign the existing SLA TTO.
+- Verified the criterion and both actions before activation.
+- Activated the rule.
+
+### Automation test
+- Created temporary incident: TEST - Automatic SLA Assignment.
+- Set Urgency = High.
+- Left both SLA fields empty during ticket creation.
+- Verified that GLPI automatically assigned SLA TTO and SLA TTR.
+- Closed the temporary test ticket after verification.
+- Result: automatic SLA assignment successfully tested for a High urgency ticket.
+
+### Final Phase 1 limitations
+- Automatic escalation alarm scheduling and execution were observed, but the intended assignment effect was not confirmed.
+- Knowledge-base Targets UI error remains unresolved; database changes were used as a lab workaround.
+- Some physical troubleshooting and account provisioning activities were simulated or deferred to later phases.
+
+## Phase 1 Completion Summary
+
+Core GLPI helpdesk and asset management exercises completed.
+
+Verified:
+- GLPI and MariaDB deployment using Docker Compose.
+- User, group and asset management.
+- Five helpdesk ticket workflows.
+- Manual SLA assignment.
+- Automatic SLA TTO and TTR assignment for a High urgency test ticket.
+- Manual escalation routing.
+- Knowledge-base article creation.
+
+Evidence:
+- Numbered screenshots stored in screenshots/phase1/.
+- Project README and troubleshooting log maintained in GitHub.
