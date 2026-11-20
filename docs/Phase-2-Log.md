@@ -30,3 +30,69 @@ No partitions, firmware settings, or TPM keys were modified.
 
 ### Evidence
 Screenshot 16: Disk Management partition layout (pending).
+
+## Lesson 2 — BIOS/UEFI and Boot Troubleshooting
+Status: Lab practice + Concept studied
+
+### Verified results
+- Firmware: UEFI
+- Secure Boot: Disabled
+- Windows Boot Manager: bootmgfw.efi
+- Default boot entry: {current}
+- Boot menu timeout: 30 seconds
+- Windows OS Loader: winload.efi
+- Windows recovery: Enabled
+- Windows RE location: Disk 0, Partition 4
+- NVMe SSD: Online and Healthy
+- Disk partition style: GPT
+
+### Troubleshooting findings
+- No active boot failure observed.
+- Secure Boot is disabled and was not changed.
+- Windows Boot Manager and recovery configuration were inspected.
+- Common boot failure scenarios were studied.
+
+### Safety
+No firmware, BCD, partition, or recovery settings were modified.
+
+### Evidence
+- Screenshot 17: 17-boot-configuration.png
+  - Secure Boot status: Disabled (False)
+  - Windows Boot Manager configuration
+  - Windows Recovery Environment: Enabled
+  - All three outputs captured in one screenshot
+ 
+## Lesson 3 — Windows Device Drivers
+
+Status: Lab practice
+
+### Objective
+Inspect Windows device drivers, identify device errors,
+and understand safe driver troubleshooting.
+
+### Practical Work
+- Inspected devices using Get-PnpDevice.
+- Verified currently present devices report no non-OK status.
+- Identified Intel Wi-Fi and Realtek Ethernet adapters.
+- Inspected signed driver information using PowerShell.
+- Listed driver packages using pnputil.
+- Reviewed safe driver installation and rollback concepts.
+
+### Verified Wi-Fi Driver
+Device: Intel Wi-Fi 6E AX211 160MHz
+Provider: Intel
+Version: 22.170.0.3
+Date: 29 August 2022
+Status: OK
+
+### Findings
+No currently present devices reported a non-OK status.
+No driver changes were performed.
+The Wi-Fi troubleshooting incident is simulated.
+
+### Evidence
+Screenshot 18: 18-device-drivers.png
+
+### Pending
+- Complete simulated Wi-Fi troubleshooting incident.
+- Complete technical interview assessment.
