@@ -201,3 +201,69 @@ Screenshot 20: 20-backup-recovery.png
 ### Pending
 - Simulated workplace recovery incident.
 - Technical interview assessment.
+
+## Lesson 6 — Hardware Troubleshooting
+
+**Status:** Lab practice — diagnostics completed
+
+### Objective
+Learn how to investigate hardware-related complaints using Windows diagnostic tools and distinguish software errors from possible hardware failures.
+
+### Topics Covered
+- Hardware troubleshooting methodology
+- Common CPU, RAM, SSD, overheating, and power problems
+- Battery health diagnostics
+- Windows Reliability Monitor
+- Windows Event Viewer
+- Application Error events
+- .NET Runtime exceptions
+- WHEA hardware error reporting
+- Unexpected shutdown events
+- Windows system file integrity verification
+
+### Practical Implementation
+1. Inspected battery information using PowerShell.
+2. Generated and reviewed a Windows battery report.
+3. Calculated battery capacity retention.
+4. Inspected available Windows power plans.
+5. Investigated critical events in Reliability Monitor.
+6. Identified recurring Acer AWC application crashes.
+7. Examined Application Error Event ID 1000 and .NET Runtime Event ID 1026.
+8. Checked recent WHEA hardware events.
+9. Checked unexpected shutdown Event IDs 41 and 6008.
+10. Verified protected Windows system files using `sfc /verifyonly`.
+
+### Verified Results
+- Laptop: Acer Aspire A715-51G
+- Battery: AP18C8K
+- Design capacity: 48,004 mWh
+- Full charge capacity: 43,301 mWh
+- Estimated capacity retention: 90.2%
+- Active power plan: Acer
+- AWC executable version: 2.5.22250.0
+- Exception: System.NullReferenceException
+- WHEA events: No matching events found in seven days
+- Unexpected shutdown events: No matching events found in seven days
+- SFC: No integrity violations detected
+
+### Simulated Workplace Incident — INC-0021
+
+**Company:** Desert Bay Trading LLC
+
+**Scenario:** An employee reports recurring critical errors on an Acer laptop.
+
+**Investigation:** Windows Reliability Monitor and Event Viewer identified repeated AWC application crashes.
+
+**Preliminary Diagnosis:** Recurring application failure. No physical hardware fault was confirmed.
+
+**Resolution Status:** Investigation completed; software repair not performed or verified.
+
+**Recommended Next Action:** Identify the relevant Acer software and evaluate an official repair or update option before making changes.
+
+### Evidence
+- Screenshot 21: Hardware troubleshooting diagnostics — pending
+
+### Pending
+- Save Screenshot 21
+- Git commit and push
+- Technical interview assessment
