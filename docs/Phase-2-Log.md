@@ -267,3 +267,114 @@ Learn how to investigate hardware-related complaints using Windows diagnostic to
 - Save Screenshot 21
 - Git commit and push
 - Technical interview assessment
+
+## Lesson 7 — Printer Troubleshooting
+
+**Classification:** Lab practice and concept studied
+
+### Objective
+Learn Windows printer configuration, print queue management, Print Spooler troubleshooting, network printer fundamentals and helpdesk incident management.
+
+### Topics Covered
+- Inkjet, laser, thermal and dot matrix printers
+- USB, network, shared and virtual printers
+- Printer drivers and driver architectures V3 and V4
+- Printer ports and default printer configuration
+- Windows Print Spooler service
+- Print queue management
+- SPL and SHD spool files
+- Printer troubleshooting methodology
+- Network printing protocols: RAW, IPP, LPR, SMB and SNMP
+- Network printer connectivity diagnostics
+- TCP/IP printer configuration
+
+### Practical Implementation
+- Inspected installed printers using Get-Printer.
+- Inspected printer drivers using Get-PrinterDriver.
+- Inspected printer ports using Get-PrinterPort.
+- Verified the default printer using Win32_Printer.
+- Inspected the Print Spooler service.
+- Created a fictional Finance department invoice.
+- Tested Microsoft Print to PDF.
+- Investigated a real stalled print job.
+- Inspected PrintService administrative event logs.
+- Successfully generated and verified a PDF.
+- Simulated a stopped Print Spooler service.
+- Restored the service and verified printer availability.
+- Created and solved a GLPI incident ticket.
+
+### Problem 1 — Print Job Stuck in Spooling
+
+**Symptom:** Notepad remained at the Now printing stage.
+
+**Diagnostic findings:**
+- Print job ID: 2
+- Job status: Spooling
+- Reported job size: 0 bytes
+- Print Spooler: Running
+- Printer status: Normal
+- Printer port: PORTPROMPT:
+- No matching PrintService administrative events returned.
+
+**Resolution:** The stalled job was no longer present in the queue, and printing was subsequently retried successfully.
+
+**Root cause:** Not conclusively established.
+
+### Problem 2 — PDF Not Found
+
+**Symptom:** PowerShell could not locate the expected PDF in the printer lab directory.
+
+**Finding:** PDF files were saved in the OneDrive Documents directory.
+
+- Unsuccessful PDF: 0 bytes
+- Successful PDF: 42,782 bytes
+
+**Resolution:** Copied the successful PDF into the designated ITSupport-PrinterLab directory and verified its content.
+
+### Problem 3 — Access Denied to Spool Directory
+
+**Symptom:** PowerShell returned an UnauthorizedAccessException when inspecting the protected spool directory.
+
+**Recommended action:** Use an elevated Windows PowerShell session.
+
+### Controlled Incident — Print Spooler Failure
+
+**Simulation:** Intentionally stopped the Print Spooler service.
+
+**Observed error:** HRESULT 0x800706ba — RPC server unavailable.
+
+**Resolution:** Started the Print Spooler service again.
+
+**Verification:** Both installed printers returned Normal status.
+
+### GLPI Incident — INC-0022
+
+- GLPI ticket ID: 13
+- Company: Desert Bay Trading LLC
+- Category: Printing and Scanning
+- Priority: Low
+- Requester: Karim Aisha
+- Technician: Omar Haddad
+- Status: Solved
+
+### Final Verified Results
+- Installed printer queues: 2
+- Installed printer driver entries: 7
+- Default printer: Microsoft Print to PDF
+- Successful PDF size: 42,782 bytes
+- Print Spooler: Running
+- Print queue: Empty
+- Printer status: Normal
+- GLPI incident: Solved
+
+### Concept Studied
+Physical network printer installation and troubleshooting were studied but not implemented because a physical network printer was unavailable.
+
+### Evidence
+- Screenshot 23: Stalled print job
+- Screenshot 24: Successful PDF generation
+- Screenshot 25: Print Spooler failure and recovery
+- Screenshot 26: Solved GLPI incident
+
+### Status
+Practical implementation completed. Interview assessment pending.
