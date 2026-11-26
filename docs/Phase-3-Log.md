@@ -210,3 +210,52 @@ GLPI documentation: Completed as reported.
 Git commit: Pending.
 
 Interview assessment: Pending.
+
+## Lesson 2 — NTFS and SMB Troubleshooting
+
+### Problem: Truncated ACL information
+
+- Symptom: PowerShell table output truncated access control information.
+- Root cause: Long identity and permission values exceeded the available display width.
+- Resolution: Used Format-List instead of Format-Table.
+- Status: Resolved.
+
+### Problem: Incomplete quotation in PowerShell
+
+- Symptom: PowerShell displayed the continuation prompt (>>).
+- Root cause: An incomplete quoted path.
+- Resolution: Cancelled the incomplete command and entered a correctly quoted path.
+- Status: Resolved.
+
+### Problem: Incorrect variable reference
+
+- Symptom: icacls reported that the specified path could not be found.
+- Root cause: Used Lab as a literal directory name instead of the $Lab variable.
+- Resolution: Used the correct PowerShell variable reference and directory path.
+- Status: Resolved.
+
+### Problem: Incorrect Advanced Security Settings navigation
+
+- Symptom: Opened the identity selection dialog instead of inspecting existing permissions.
+- Root cause: Incorrect GUI navigation.
+- Resolution: Returned to the Advanced Security Settings window and inspected inherited permissions.
+- Status: Resolved.
+
+### Problem: RUNAS authentication failure
+
+- Symptom: RUNAS returned Error 1326 — The user name or password is incorrect.
+- Affected accounts: dbt.sara, dbt.hassan and dbt.mariam.
+- Observed failures: Nine failed attempts.
+- Investigation: Account status, password status and Security Event ID 4625 were identified as diagnostic checks.
+- Root cause: Exact underlying cause not confirmed.
+- Resolution: Subsequent employee access tests were reported successful. Exact corrective action was not supplied.
+- Status: Access restored according to operator confirmation.
+
+### Simulated incident: INC-0024 — Finance shared folder access denied
+
+- Symptom: Finance employee unable to access authorized departmental files.
+- Root cause: Finance security group membership intentionally removed during controlled incident simulation.
+- Resolution: Restored DBT-Finance membership and established a fresh authentication session.
+- Verification: Authorized access restored while unauthorized access remained restricted.
+- GLPI status: Solved, as confirmed by the lab operator.
+- Classification: Controlled incident simulation.
